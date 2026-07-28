@@ -398,6 +398,44 @@ ul { list-style: none; }
 }
 
 /* ============================================================
+   LEETCODE
+   ============================================================ */
+.leetcode-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  background: var(--white);
+  padding: 2.5rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+  transition: all 0.3s var(--ease);
+}
+.leetcode-wrapper:hover {
+  box-shadow: var(--shadow-md);
+}
+.leetcode-card-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+.leetcode-img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius-sm);
+}
+.leetcode-cta p {
+  color: var(--text-mid);
+  font-size: 0.95rem;
+  max-width: 600px;
+  margin: 0 auto 1.5rem;
+  line-height: 1.6;
+}
+
+/* ============================================================
    PROJECTS
    ============================================================ */
 .projects-grid {
