@@ -208,13 +208,13 @@ document.addEventListener('DOMContentLoaded', () => {
           form.reset();
           setTimeout(() => { if (formSuccess) formSuccess.style.display = 'none'; }, 5000);
         } else {
-          alert('Something went wrong. Please email me directly at upareonakr30@gmail.com');
+          alert('Something went wrong. Please email me directly at upareonkar30@gmail.com');
         }
       })
       .catch(() => {
         if (btnLoading) btnLoading.style.display = 'none';
         if (btnText) btnText.style.display = 'inline-flex';
-        alert('Could not send message. Please email me directly at upareonakr30@gmail.com');
+        alert('Could not send message. Please email me directly at upareonkar30@gmail.com');
       });
     });
   }
