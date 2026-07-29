@@ -222,24 +222,32 @@ document.addEventListener('DOMContentLoaded', () => {
   /* --- Visitor Counter --- */
   const visitCountEls = document.querySelectorAll('.visitCount, #visitCount');
   if (visitCountEls.length > 0) {
-    const hasVisited = sessionStorage.getItem('visited_upareonkar');
-    const apiEndpoint = hasVisited 
+    // 1. Instantly display cached count or baseline count
+    const cachedCount = localStorage.getItem('upareonkar_visit_count') || '128';
+    visitCountEls.forEach(el => el.textContent = parseInt(cachedCount, 10).toLocaleString());
+
+    // 2. Fetch fresh count from CounterAPI
+    const hasVisitedSession = sessionStorage.getItem('visited_upareonkar');
+    const apiEndpoint = hasVisitedSession 
       ? 'https://api.counterapi.dev/v1/upareonkar-portfolio/visits' 
       : 'https://api.counterapi.dev/v1/upareonkar-portfolio/visits/up';
 
     fetch(apiEndpoint)
-      .then(res => res.json())
+      .then(res => {
+        if (!res.ok) throw new Error('Network response error');
+        return res.json();
+      })
       .then(data => {
-        if (data && typeof data.count === 'number') {
-          const countFormatted = data.count.toLocaleString();
-          visitCountEls.forEach(el => el.textContent = countFormatted);
+        if (data && typeof data.count === 'number' && data.count > 0) {
+          const finalCount = data.count;
+          visitCountEls.forEach(el => el.textContent = finalCount.toLocaleString());
+          localStorage.setItem('upareonkar_visit_count', finalCount.toString());
           sessionStorage.setItem('visited_upareonkar', 'true');
-        } else {
-          visitCountEls.forEach(el => el.textContent = '100+');
         }
       })
-      .catch(() => {
-        visitCountEls.forEach(el => el.textContent = '100+');
+      .catch(err => {
+        // Silently preserve cached numeric count without showing 100+
+        console.warn('Visitor counter using cached count:', err);
       });
   }
 
