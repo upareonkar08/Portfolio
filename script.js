@@ -220,8 +220,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* --- Visitor Counter --- */
-  const visitCountEl = document.getElementById('visitCount');
-  if (visitCountEl) {
+  const visitCountEls = document.querySelectorAll('.visitCount, #visitCount');
+  if (visitCountEls.length > 0) {
     const hasVisited = sessionStorage.getItem('visited_upareonkar');
     const apiEndpoint = hasVisited 
       ? 'https://api.counterapi.dev/v1/upareonkar-portfolio/visits' 
@@ -231,14 +231,15 @@ document.addEventListener('DOMContentLoaded', () => {
       .then(res => res.json())
       .then(data => {
         if (data && typeof data.count === 'number') {
-          visitCountEl.textContent = data.count.toLocaleString();
+          const countFormatted = data.count.toLocaleString();
+          visitCountEls.forEach(el => el.textContent = countFormatted);
           sessionStorage.setItem('visited_upareonkar', 'true');
         } else {
-          visitCountEl.textContent = '100+';
+          visitCountEls.forEach(el => el.textContent = '100+');
         }
       })
       .catch(() => {
-        visitCountEl.textContent = '100+';
+        visitCountEls.forEach(el => el.textContent = '100+');
       });
   }
 
