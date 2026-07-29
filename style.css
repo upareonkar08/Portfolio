@@ -411,41 +411,78 @@ ul { list-style: none; }
 }
 
 /* ============================================================
-   LEETCODE
+   ACTIVITY (GITHUB & LEETCODE)
    ============================================================ */
-.leetcode-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.activity-grid {
+  display: grid;
+  grid-template-columns: 1fr;
   gap: 2rem;
+}
+.activity-card {
   background: var(--white);
-  padding: 2.5rem;
+  padding: 2.25rem;
   border-radius: var(--radius);
   border: 1px solid var(--border);
   box-shadow: var(--shadow-sm);
-  text-align: center;
   transition: all 0.3s var(--ease);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
-.leetcode-wrapper:hover {
+.activity-card:hover {
   box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
 }
-.leetcode-card-container {
+.activity-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+.activity-header h4 {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--text);
+}
+.activity-header h4 i {
+  color: var(--accent);
+  margin-right: 0.4rem;
+}
+.activity-badge {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--accent);
+  background: var(--accent-soft);
+  padding: 3px 10px;
+  border-radius: 50px;
+}
+.activity-img-wrap {
   width: 100%;
   display: flex;
   justify-content: center;
-  overflow: hidden;
+  overflow-x: auto;
+  padding: 0.5rem 0 1rem;
 }
-.leetcode-img {
+.activity-img {
   max-width: 100%;
   height: auto;
   border-radius: var(--radius-sm);
 }
-.leetcode-cta p {
+.activity-cta p {
   color: var(--text-mid);
-  font-size: 0.95rem;
-  max-width: 600px;
-  margin: 0 auto 1.5rem;
-  line-height: 1.6;
+  font-size: 0.9rem;
+  margin-bottom: 1.25rem;
+}
+.btn-sm {
+  padding: 8px 18px;
+  font-size: 0.85rem;
 }
 
 /* ============================================================
