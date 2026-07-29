@@ -219,4 +219,27 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  /* --- Visitor Counter --- */
+  const visitCountEl = document.getElementById('visitCount');
+  if (visitCountEl) {
+    const hasVisited = sessionStorage.getItem('visited_upareonkar');
+    const apiEndpoint = hasVisited 
+      ? 'https://api.counterapi.dev/v1/upareonkar-portfolio/visits' 
+      : 'https://api.counterapi.dev/v1/upareonkar-portfolio/visits/up';
+
+    fetch(apiEndpoint)
+      .then(res => res.json())
+      .then(data => {
+        if (data && typeof data.count === 'number') {
+          visitCountEl.textContent = data.count.toLocaleString();
+          sessionStorage.setItem('visited_upareonkar', 'true');
+        } else {
+          visitCountEl.textContent = '100+';
+        }
+      })
+      .catch(() => {
+        visitCountEl.textContent = '100+';
+      });
+  }
+
 });
