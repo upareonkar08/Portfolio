@@ -216,32 +216,32 @@
   <!-- Activity & Contributions -->
   <section class="section section-alt" id="activity">
     <div class="container">
-      <h2 class="section-label">Coding Activity</h2>
-      <h3 class="section-heading">GitHub Contributions &amp; LeetCode Streak.</h3>
+      <h2 class="section-label">GitHub Account Overview</h2>
+      <h3 class="section-heading">Live GitHub Analytics &amp; Profile README.</h3>
 
       <div class="activity-grid">
-        <!-- GitHub Contributions Card -->
+        <!-- GitHub Stats & Languages Card -->
         <div class="activity-card reveal">
           <div class="activity-header">
-            <h4><i class="fab fa-github"></i> GitHub Contributions</h4>
-            <span class="activity-badge">Open Source</span>
+            <h4><i class="fab fa-github"></i> GitHub Streak Analytics</h4>
+            <span class="activity-badge">Contributions &amp; Streak</span>
           </div>
           <div class="activity-img-wrap">
-            <img src="https://ghchart.rshah.org/2563eb/upareonkar08" alt="Onkar Upare GitHub Contributions Calendar" loading="lazy" class="activity-img">
+            <img src="https://streak-stats.demolab.com/?user=upareonkar08&theme=light&hide_border=true" alt="Onkar Upare GitHub Streak Stats" loading="lazy" class="activity-img">
           </div>
           <div class="activity-cta">
-            <p>Active open-source commits, full-stack builds, and collaborative repository development.</p>
+            <p>Real-time commit statistics, pull requests, and core language breakdown on GitHub.</p>
             <a href="https://github.com/upareonkar08" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">
               View GitHub Profile <i class="fas fa-external-link-alt"></i>
             </a>
           </div>
         </div>
 
-        <!-- LeetCode Card -->
+        <!-- LeetCode & Streak Card -->
         <div class="activity-card reveal">
           <div class="activity-header">
-            <h4><i class="fas fa-code"></i> LeetCode Activity</h4>
-            <span class="activity-badge">Problem Solving</span>
+            <h4><i class="fas fa-code"></i> LeetCode &amp; Problem Solving</h4>
+            <span class="activity-badge">DSA &amp; Heatmap</span>
           </div>
           <div class="activity-img-wrap">
             <img src="https://leetcard.jacoblin.cool/upareonkar?ext=heatmap&theme=light&font=Inter" alt="Onkar Upare LeetCode Stats &amp; Streak" loading="lazy" class="activity-img">
@@ -253,9 +253,48 @@
             </a>
           </div>
         </div>
+
+        <!-- GitHub Heatmap Card -->
+        <div class="activity-card reveal activity-card--full">
+          <div class="activity-header">
+            <h4><i class="fas fa-fire"></i> Contribution Calendar</h4>
+            <span class="activity-badge">Activity Graph</span>
+          </div>
+          <div class="activity-img-wrap activity-img-wrap--heatmap">
+            <img src="https://github-readme-activity-graph.vercel.app/graph?username=upareonkar08&theme=github-light&hide_border=true" alt="Onkar Upare Live GitHub Activity Graph" loading="lazy" class="activity-img" id="githubActivityGraph">
+          </div>
+          <div class="activity-cta activity-cta--flex">
+            <p>Active open-source commits, full-stack builds, and collaborative repository development.</p>
+            <button class="btn btn-ghost btn-sm" id="openReadmeModalBtn">
+              <i class="fas fa-file-alt"></i> Preview GitHub Profile README
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </section>
+
+  <!-- GitHub Profile README Modal -->
+  <div class="modal-overlay" id="readmeModal" aria-hidden="true">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title"><i class="fab fa-github"></i> Profile README (`README.md`)</h3>
+        <button class="modal-close" id="closeReadmeModalBtn" aria-label="Close modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-desc">This is your newly generated, high-impact GitHub Profile README markdown. You can copy it directly and paste it into your <code>upareonkar08/upareonkar08</code> profile repository on GitHub!</p>
+        <div class="code-actions">
+          <button class="btn btn-primary btn-sm" id="copyReadmeBtn">
+            <i class="fas fa-copy"></i> Copy Markdown Code
+          </button>
+          <a href="README.md" download="README.md" class="btn btn-ghost btn-sm">
+            <i class="fas fa-download"></i> Download README.md
+          </a>
+        </div>
+        <textarea id="readmeTextarea" readonly class="modal-code-area"></textarea>
+      </div>
+    </div>
+  </div>
 
   <!-- Education -->
   <section class="section" id="education">

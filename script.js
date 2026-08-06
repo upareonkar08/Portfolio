@@ -251,4 +251,63 @@ document.addEventListener('DOMContentLoaded', () => {
       });
   }
 
+  /* --- GitHub Profile README Modal & Copy --- */
+  const readmeModal = document.getElementById('readmeModal');
+  const openBtn = document.getElementById('openReadmeModalBtn');
+  const closeBtn = document.getElementById('closeReadmeModalBtn');
+  const copyBtn = document.getElementById('copyReadmeBtn');
+  const readmeTextarea = document.getElementById('readmeTextarea');
+
+  if (readmeModal && openBtn) {
+    openBtn.addEventListener('click', () => {
+      readmeModal.classList.add('active');
+      readmeModal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+
+      // Load README.md content if empty
+      if (readmeTextarea && !readmeTextarea.value) {
+        fetch('README.md')
+          .then(res => res.text())
+          .then(text => {
+            readmeTextarea.value = text;
+          })
+          .catch(() => {
+            readmeTextarea.value = 'Failed to load README.md content directly. You can inspect the README.md file in the workspace directory.';
+          });
+      }
+    });
+
+    const closeModal = () => {
+      readmeModal.classList.remove('active');
+      readmeModal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    };
+
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+    readmeModal.addEventListener('click', (e) => {
+      if (e.target === readmeModal) closeModal();
+    });
+
+    if (copyBtn && readmeTextarea) {
+      copyBtn.addEventListener('click', () => {
+        readmeTextarea.select();
+        navigator.clipboard.writeText(readmeTextarea.value)
+          .then(() => {
+            const orig = copyBtn.innerHTML;
+            copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+            setTimeout(() => { copyBtn.innerHTML = orig; }, 2500);
+          })
+          .catch(err => {
+            console.error('Copy failed:', err);
+          });
+      });
+    }
+  }
+
+  /* --- Live GitHub Activity Graph Refresh --- */
+  const ghGraphImg = document.getElementById('githubActivityGraph');
+  if (ghGraphImg) {
+    ghGraphImg.src = `https://github-readme-activity-graph.vercel.app/graph?username=upareonkar08&theme=github-light&hide_border=true&t=${Date.now()}`;
+  }
+
 });
