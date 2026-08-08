@@ -373,6 +373,8 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
+    let lastQuestion = '';
+
     // Custom user question submission
     chatForm?.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -381,6 +383,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
       appendMessage(userQ, 'user');
       chatInput.value = '';
+
+      // Check if user entered an email address to get a reply
+      if (userQ.includes('@') && userQ.includes('.')) {
+        fetch('https://formsubmit.co/ajax/upareonkar30@gmail.com', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({
+            name: 'Portfolio Visitor Reply Email',
+            email: userQ,
+            subject: `Reply Email for Question: ${lastQuestion ? lastQuestion.substring(0, 40) : 'Portfolio Inquiry'}`,
+            message: `Visitor Email: ${userQ}\nOriginal Question: ${lastQuestion || 'N/A'}`
+          })
+        }).catch(err => console.warn(err));
+
+        setTimeout(() => {
+          appendMessage(`✅ <strong>Saved!</strong> Onkar will reply to <code>${userQ}</code> as soon as he's online!`, 'bot');
+        }, 400);
+        return;
+      }
+
+      lastQuestion = userQ;
 
       // Check if quick match
       const qLower = userQ.toLowerCase();
@@ -406,7 +429,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (matchedAns) {
           appendMessage(matchedAns, 'bot');
         }
-        appendMessage("📩 <strong>Question delivered to Onkar!</strong> I've forwarded your message to my inbox (<code>upareonkar30@gmail.com</code>). I'll respond as soon as I'm back online!", 'bot');
+        appendMessage("📩 <strong>Question delivered to Onkar!</strong> To get a reply directly to your inbox, type your email address below:", 'bot');
       }, 500);
     });
   }
