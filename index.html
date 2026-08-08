@@ -526,6 +526,50 @@
     </div>
   </footer>
 
+  <!-- Floating Ask Me Chatbot Widget -->
+  <div class="chat-widget" id="chatWidget">
+    <button class="chat-launcher" id="chatLauncher" aria-label="Ask Onkar a question" title="Ask Onkar a question">
+      <span class="chat-status-dot"></span>
+      <i class="fas fa-comments chat-icon-open"></i>
+      <i class="fas fa-times chat-icon-close"></i>
+      <span class="chat-launcher-label">Ask Me Anything</span>
+    </button>
+
+    <div class="chat-box" id="chatBox" aria-hidden="true">
+      <div class="chat-header">
+        <div class="chat-user-info">
+          <img src="profile.jpg" alt="Onkar Upare" class="chat-avatar">
+          <div>
+            <h4>Onkar Upare</h4>
+            <span class="chat-online-text"><span class="chat-dot"></span> Active — Replies when online</span>
+          </div>
+        </div>
+        <button class="chat-close-btn" id="chatCloseBtn" aria-label="Close chat">&times;</button>
+      </div>
+
+      <div class="chat-messages" id="chatMessages">
+        <div class="chat-msg chat-msg--bot">
+          <p>Hi there! 👋 I'm <strong>Onkar Upare</strong>. Ask me anything about my AI/ML projects, skills, certifications, or open opportunities!</p>
+          <span class="chat-time">Just now</span>
+        </div>
+
+        <div class="chat-suggestions" id="chatSuggestions">
+          <button class="chat-chip" data-question="What are your top projects?">💡 Top Projects</button>
+          <button class="chat-chip" data-question="What is your education and CGPA?">🎓 Education &amp; CGPA</button>
+          <button class="chat-chip" data-question="What certifications do you hold?">🏆 Certifications</button>
+          <button class="chat-chip" data-question="Are you open for internships?">💼 Open for Internships?</button>
+        </div>
+      </div>
+
+      <form class="chat-input-form" id="chatForm">
+        <input type="text" id="chatInput" placeholder="Type your question..." autocomplete="off" required>
+        <button type="submit" id="chatSendBtn" aria-label="Send message">
+          <i class="fas fa-paper-plane"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+
   <script src="script.js"></script>
 </body>
 </html>

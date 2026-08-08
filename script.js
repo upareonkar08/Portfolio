@@ -310,4 +310,105 @@ document.addEventListener('DOMContentLoaded', () => {
     ghGraphImg.src = `https://github-readme-activity-graph.vercel.app/graph?username=upareonkar08&theme=github-light&hide_border=true&t=${Date.now()}`;
   }
 
+  /* --- Floating Ask Me Chatbot Widget --- */
+  const chatWidget = document.getElementById('chatWidget');
+  const chatLauncher = document.getElementById('chatLauncher');
+  const chatCloseBtn = document.getElementById('chatCloseBtn');
+  const chatForm = document.getElementById('chatForm');
+  const chatInput = document.getElementById('chatInput');
+  const chatMessages = document.getElementById('chatMessages');
+  const chatSuggestions = document.getElementById('chatSuggestions');
+
+  if (chatLauncher && chatWidget) {
+    const toggleChat = () => {
+      chatWidget.classList.toggle('active');
+      if (chatWidget.classList.contains('active')) {
+        chatInput?.focus();
+      }
+    };
+
+    chatLauncher.addEventListener('click', toggleChat);
+    chatCloseBtn?.addEventListener('click', toggleChat);
+
+    const appendMessage = (text, sender = 'bot') => {
+      const msgDiv = document.createElement('div');
+      msgDiv.className = `chat-msg chat-msg--${sender}`;
+      const timeStr = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      msgDiv.innerHTML = `<p>${text}</p><span class="chat-time">${timeStr}</span>`;
+      chatMessages.appendChild(msgDiv);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    };
+
+    const botKnowledge = {
+      'projects': "I've built 3 major full-stack AI platforms: 📈 <strong>StockSense</strong> (Portfolio Analytics), 🤖 <strong>AutoResearch Agent</strong> (Multi-Agent RAG), and 🎼 <strong>Orchestra AI</strong> (Multi-Agent Flow System)!",
+      'education': "I'm pursuing my <strong>B.Tech in AI & ML</strong> at SRM Institute of Science & Technology, Trichy (2024–2028) with an <strong>8.63 CGPA</strong> & Merit Scholarship!",
+      'certifications': "I hold 8 professional certifications including the <strong>Google Cloud Generative AI Leader</strong>, <strong>Google AI Essentials</strong>, AWS Cloud, IBM AI, and Duke University Java!",
+      'internships': "Yes! 💼 I am actively seeking <strong>AI/ML & Full-Stack Software Engineering internships</strong>. Feel free to send me a message here or email me at <code>upareonkar30@gmail.com</code>!"
+    };
+
+    const handleQuickPrompt = (qText) => {
+      appendMessage(qText, 'user');
+      const qLower = qText.toLowerCase();
+
+      setTimeout(() => {
+        if (qLower.includes('project')) {
+          appendMessage(botKnowledge.projects, 'bot');
+        } else if (qLower.includes('education') || qLower.includes('cgpa')) {
+          appendMessage(botKnowledge.education, 'bot');
+        } else if (qLower.includes('certif')) {
+          appendMessage(botKnowledge.certifications, 'bot');
+        } else if (qLower.includes('intern') || qLower.includes('open')) {
+          appendMessage(botKnowledge.internships, 'bot');
+        } else {
+          appendMessage("Thanks for asking! I've logged your question. Feel free to drop a note directly at <code>upareonkar30@gmail.com</code>!", 'bot');
+        }
+      }, 400);
+    };
+
+    // Quick suggestion chip clicks
+    chatSuggestions?.querySelectorAll('.chat-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        const qText = chip.getAttribute('data-question');
+        if (qText) handleQuickPrompt(qText);
+      });
+    });
+
+    // Custom user question submission
+    chatForm?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const userQ = chatInput.value.trim();
+      if (!userQ) return;
+
+      appendMessage(userQ, 'user');
+      chatInput.value = '';
+
+      // Check if quick match
+      const qLower = userQ.toLowerCase();
+      let matchedAns = null;
+      if (qLower.includes('project')) matchedAns = botKnowledge.projects;
+      else if (qLower.includes('education') || qLower.includes('cgpa') || qLower.includes('srm')) matchedAns = botKnowledge.education;
+      else if (qLower.includes('certif') || qLower.includes('google') || qLower.includes('aws')) matchedAns = botKnowledge.certifications;
+      else if (qLower.includes('intern') || qLower.includes('hire') || qLower.includes('job')) matchedAns = botKnowledge.internships;
+
+      // Dispatch to FormSubmit API in background so Onkar gets question in inbox
+      fetch('https://formsubmit.co/ajax/upareonkar30@gmail.com', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          name: 'Portfolio Visitor (Ask Me Chatbot)',
+          email: 'visitor@portfolio.chat',
+          subject: 'New Question from Portfolio Chatbot Widget',
+          message: userQ
+        })
+      }).catch(err => console.warn('Chatbot email dispatch error:', err));
+
+      setTimeout(() => {
+        if (matchedAns) {
+          appendMessage(matchedAns, 'bot');
+        }
+        appendMessage("📩 <strong>Question delivered to Onkar!</strong> I've forwarded your message to my inbox (<code>upareonkar30@gmail.com</code>). I'll respond as soon as I'm back online!", 'bot');
+      }, 500);
+    });
+  }
+
 });
