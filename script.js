@@ -251,7 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
   }
 
-  /* --- GitHub Profile README Modal & Copy --- */
+  /* --- GitHub Profile README Modal & Copy (Optional) --- */
   const readmeModal = document.getElementById('readmeModal');
   const openBtn = document.getElementById('openReadmeModalBtn');
   const closeBtn = document.getElementById('closeReadmeModalBtn');
@@ -264,16 +264,11 @@ document.addEventListener('DOMContentLoaded', () => {
       readmeModal.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
 
-      // Load README.md content if empty
       if (readmeTextarea && !readmeTextarea.value) {
         fetch('README.md')
           .then(res => res.text())
-          .then(text => {
-            readmeTextarea.value = text;
-          })
-          .catch(() => {
-            readmeTextarea.value = 'Failed to load README.md content directly. You can inspect the README.md file in the workspace directory.';
-          });
+          .then(text => { readmeTextarea.value = text; })
+          .catch(() => { readmeTextarea.value = 'Failed to load README.md.'; });
       }
     });
 
@@ -297,17 +292,9 @@ document.addEventListener('DOMContentLoaded', () => {
             copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
             setTimeout(() => { copyBtn.innerHTML = orig; }, 2500);
           })
-          .catch(err => {
-            console.error('Copy failed:', err);
-          });
+          .catch(err => { console.error('Copy failed:', err); });
       });
     }
-  }
-
-  /* --- Live GitHub Activity Graph Refresh --- */
-  const ghGraphImg = document.getElementById('githubActivityGraph');
-  if (ghGraphImg) {
-    ghGraphImg.src = `https://github-readme-activity-graph.vercel.app/graph?username=upareonkar08&theme=github-light&hide_border=true&t=${Date.now()}`;
   }
 
   /* --- Floating Ask Me Chatbot Widget --- */
