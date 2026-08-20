@@ -51,11 +51,27 @@ ul { list-style: none; }
 .section-label {
   font-family: var(--font-sans);
   font-size: 0.8rem;
-  font-weight: 500;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 3px;
   color: var(--accent);
   margin-bottom: 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.section-label::after {
+  content: '';
+  display: inline-block;
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  border-radius: 2px;
+  animation: linePulse 3s ease-in-out infinite alternate;
+}
+@keyframes linePulse {
+  0% { width: 40px; opacity: 0.5; }
+  100% { width: 90px; opacity: 1; }
 }
 
 .section-heading {
@@ -429,78 +445,69 @@ ul { list-style: none; }
 }
 
 /* ============================================================
-   ACTIVITY (GITHUB & LEETCODE)
+   LEETCODE & COMPETITIVE PROGRAMMING (HORIZONTALLY WIDE & ANIMATED)
    ============================================================ */
-.activity-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
-}
-.activity-card {
+.leetcode-wrapper {
+  max-width: 950px;
+  width: 100%;
+  margin: 0 auto;
   background: var(--white);
-  padding: 2.25rem;
-  border-radius: var(--radius);
   border: 1px solid var(--border);
-  box-shadow: var(--shadow-sm);
-  transition: all 0.3s var(--ease);
+  border-radius: var(--radius);
+  padding: 3rem 2.5rem;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.04);
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
+  gap: 2rem;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s var(--ease);
 }
-.activity-card:hover {
-  box-shadow: var(--shadow-md);
-  transform: translateY(-2px);
-}
-.activity-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.leetcode-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
   width: 100%;
-  margin-bottom: 1.25rem;
-  padding-bottom: 0.75rem;
-  border-bottom: 1px solid var(--border);
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--accent), #f59e0b, transparent);
+  animation: shimmerLine 3.5s infinite;
 }
-.activity-header h4 {
-  font-family: var(--font-sans);
-  font-weight: 700;
-  font-size: 1.15rem;
-  color: var(--text);
+@keyframes shimmerLine {
+  0% { left: -100%; }
+  100% { left: 100%; }
 }
-.activity-header h4 i {
-  color: var(--accent);
-  margin-right: 0.4rem;
+.leetcode-wrapper:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 45px rgba(37, 99, 235, 0.12);
+  border-color: rgba(37, 99, 235, 0.3);
 }
-.activity-badge {
-  font-size: 0.72rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: var(--accent);
-  background: var(--accent-soft);
-  padding: 3px 10px;
-  border-radius: 50px;
-}
-.activity-img-wrap {
+.leetcode-card-container {
   width: 100%;
   display: flex;
   justify-content: center;
+  align-items: center;
   overflow-x: auto;
-  padding: 0.5rem 0 1rem;
+  padding: 0.5rem 0;
 }
-.activity-img {
+.leetcode-img {
   max-width: 100%;
+  width: 850px;
   height: auto;
   border-radius: var(--radius-sm);
+  transition: transform 0.3s var(--ease);
 }
-.activity-cta p {
+.leetcode-wrapper:hover .leetcode-img {
+  transform: scale(1.01);
+}
+.leetcode-cta p {
+  font-size: 1.05rem;
   color: var(--text-mid);
-  font-size: 0.9rem;
-  margin-bottom: 1.25rem;
-}
-.btn-sm {
-  padding: 8px 18px;
-  font-size: 0.85rem;
+  max-width: 650px;
+  margin: 0 auto 1.5rem;
+  line-height: 1.6;
 }
 
 /* ============================================================
