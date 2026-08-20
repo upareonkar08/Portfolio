@@ -445,7 +445,7 @@ ul { list-style: none; }
 }
 
 /* ============================================================
-   LEETCODE & COMPETITIVE PROGRAMMING (HORIZONTALLY WIDE & ANIMATED)
+   LEETCODE & COMPETITIVE PROGRAMMING (WIDE & COMPACT VERTICALLY)
    ============================================================ */
 .leetcode-wrapper {
   max-width: 950px;
@@ -454,13 +454,13 @@ ul { list-style: none; }
   background: var(--white);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 3rem 2.5rem;
+  padding: 1.5rem 2rem;
   box-shadow: 0 10px 35px rgba(0, 0, 0, 0.04);
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 2rem;
+  gap: 1.25rem;
   position: relative;
   overflow: hidden;
   transition: all 0.4s var(--ease);
@@ -480,8 +480,8 @@ ul { list-style: none; }
   100% { left: 100%; }
 }
 .leetcode-wrapper:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 20px 45px rgba(37, 99, 235, 0.12);
+  transform: translateY(-4px);
+  box-shadow: 0 15px 40px rgba(37, 99, 235, 0.12);
   border-color: rgba(37, 99, 235, 0.3);
 }
 .leetcode-card-container {
@@ -490,11 +490,13 @@ ul { list-style: none; }
   justify-content: center;
   align-items: center;
   overflow-x: auto;
-  padding: 0.5rem 0;
+  padding: 0.25rem 0;
 }
 .leetcode-img {
   max-width: 100%;
-  width: 850px;
+  width: 800px;
+  max-height: 250px;
+  object-fit: contain;
   height: auto;
   border-radius: var(--radius-sm);
   transition: transform 0.3s var(--ease);
@@ -503,11 +505,11 @@ ul { list-style: none; }
   transform: scale(1.01);
 }
 .leetcode-cta p {
-  font-size: 1.05rem;
+  font-size: 0.95rem;
   color: var(--text-mid);
   max-width: 650px;
-  margin: 0 auto 1.5rem;
-  line-height: 1.6;
+  margin: 0 auto 0.85rem;
+  line-height: 1.5;
 }
 
 /* ============================================================
